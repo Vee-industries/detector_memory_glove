@@ -261,6 +261,18 @@ Memory taken from a different entity falls to the no-memory rate. Shuffling even
 
 Detection tracks the longest identity the attacker does not rotate. Keeping memory on every readable key costs nothing against the best single key, and moves the attacker's cost to rotating all of them. Untested: an attacker who rotates every key at the pod's rate, and a detector that links keys across rotations by behaviour.
 
+### CUSUM on the corrected protocol, and detection against false-alarm rate
+
+`scripts/16_roc_and_cusum.py`. CUSUM tied the memory layer on the original, attackers-only protocol. On the fair long campaign, run on the no-memory score with its reference level (mean benign score) and slack chosen on the calibration set (slack 0), it lands within two points of the memory layer at both windows. The two carry the same information; the memory layer is the one learned from data.
+
+| Policy, fair long campaign, 5% false alarms | 24h | 120h |
+|---|---:|---:|
+| No memory | 0.10 | 0.13 |
+| CUSUM on the no-memory score | 0.53 | 0.92 |
+| Memory, fast tier | 0.55 | 0.94 |
+
+`outputs/roc_and_cusum.png` gives detection against false-alarm rate for all three, threshold swept over calibration quantiles from 0.5 to 30 percent and evaluated on test, so the 5 percent used throughout is one point on a curve.
+
 ### R_det, numerically
 
 R_det is estimated by a classifier plug-in: the out-of-sample cross-entropy of a fitted model for risk given X upper-bounds H(risk | X), so H(risk) minus that cross-entropy lower-bounds I(risk; X), and

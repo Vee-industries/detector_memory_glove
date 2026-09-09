@@ -39,10 +39,11 @@ detector_memory_glove/
 ├── models/                      ema_model.joblib, slow_ema_model.joblib
 ├── scripts/
 │   ├── 01 to 07                 locked pipeline: calibration, sweeps, exports
-│   ├── 08 to 15                 review pass: lag baselines and R_det, benign
+│   ├── 08 to 16                 review pass: lag baselines and R_det, benign
 │   │                            population (short, long), clock oracle, signal sweep,
 │   │                            incident-calibrated replay, temporal-structure controls,
-│   │                            memory keyed on identities that outlive the pod
+│   │                            memory keyed on identities that outlive the pod,
+│   │                            CUSUM baseline and detection-vs-false-alarm curves
 │   ├── memory_severity_scorer.py
 │   └── multi_window_memory_severity_scorer.py
 ├── outputs/                     CSV, JSON, PNG for every result
@@ -60,7 +61,7 @@ Tests, from the project root (Python 3.10, scikit-learn 1.7.2, scipy):
 python run_all_tests.py
 ```
 
-Reproduce the review-pass results (scripts 10, 11, 13, 14, and 15 take a few minutes each; 08, 09, and 12 take tens of minutes on one core):
+Reproduce the review-pass results (scripts 10, 11, 13, 14, 15, and 16 take a few minutes each; 08, 09, and 12 take tens of minutes on one core):
 
 ```bash
 python scripts/10_clock_oracle.py
@@ -71,6 +72,7 @@ python scripts/12_signal_strength_sweep.py
 GLOVE_RISK_STAGE=2 python scripts/13_incident_calibrated_replay.py
 python scripts/14_temporal_structure_controls.py
 python scripts/15_entity_keys.py
+python scripts/16_roc_and_cusum.py
 ```
 
 `GLOVE_SMOKE=1` runs any of them end to end in about a minute with meaningless numbers. `GLOVE_RISK_STAGE=2` reruns 09, 11, and 13 with the risk label at lateral movement; outputs get a `_risk_stage2` suffix. `GLOVE_REPLOT=1` re-renders the sweep figure from its CSV. Rerun the locked scripts 01 to 07 only if the generator or feature model changes.

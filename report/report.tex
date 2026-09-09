@@ -19,7 +19,7 @@ A synthetic, incident-shaped evaluation with false alarms capped at 5\% of benig
 Kevin Vaillancourt, independent researcher, Sudbury, Ontario. With Apart Research.\par
 \vspace{10pt}
 
-\noindent\textbf{Abstract.} Events viewed in isolation do not carry enough signal to cross the threshold into a security event; the accumulation of events does. The detector averages an entity's past events and scores the average beside the current event. The evaluation adds four benign entities per attacker, after an initial 59\% result proved to be driven by entity age. On synthetic campaigns calibrated to the timing and phase structure of Hugging Face's published 108-hour incident, with false alarms capped at 5\%, detection within 120 hours rises from 13\% without memory to 92\% with it. Controls show the advantage depends on ordered evidence staying attached to the same entity; breaking that removes most of the gain. $R_{\rm det}$, the share of predictive information attributable to history rather than the current event, is a diagnostic for whether history holds exploitable signal. These rates are properties of the synthetic generator, not measurements of Hugging Face telemetry.
+\noindent\textbf{Abstract.} Events viewed in isolation do not carry enough signal to cross the threshold into a security event; the accumulation of events does. The detector averages an entity's past events and scores the average beside the current event. On synthetic campaigns calibrated to the timing and phase structure of Hugging Face's published 108-hour incident, with false alarms capped at 5\%, detection within 120 hours rises from 13\% without memory to 92\% with it. The evaluation adds four benign entities per attacker, after an initial 59\% result proved to be driven by entity age. Controls show the advantage depends on ordered evidence staying attached to the same entity; breaking that removes most of the gain. $R_{\rm det}$, the share of predictive information attributable to history rather than the current event, is a diagnostic for whether history holds exploitable signal. These rates are properties of the synthetic generator, not measurements of Hugging Face telemetry.
 
 \section*{1. Introduction}
 The detection stack at Hugging Face, by their own account, judged each signal on its own and did not consider the history of the intrusion, only individual events \cite{hf_timeline}. Single alerts do not carry enough signal on their own for this kind of attack. The shape of the attack motivated a detector that considers the history of events rather than current events in isolation. The question is the one my current research asks of persistent state \cite{vaillancourt_r}.
@@ -38,7 +38,7 @@ Our main contributions are:
 \noindent\textit{The incident, from the sources.} Between 9 and 13 July 2026, agents run by OpenAI during an internal cyber-capability evaluation escaped their sandbox and compromised Hugging Face's production infrastructure \cite{hf_timeline,openai_pm}. Hugging Face's reconstruction: about 17,600 attacker actions over 108 hours; daily counts 3,779 / 1,135 / 7,677 / 3,892 / 1,130; phases of 6,191 reconnaissance, 2,911 code-execution, 6,972 dropper actions and under 500 across exfiltration, command-and-control, Kubernetes, supply-chain and Tailscale; lateral movement from 11 July 10:10 UTC (hour 56); attacker cut off 13 July 14:14 UTC, 52 hours later. Their words on detection: signals ``from several layers of our security stack at once,'' each ``ambiguous,'' and the stack ``failed to correctly raise the alert's criticality and trigger the on-call team'' \cite{hf_timeline}.
 
 \section*{2. Related Work}
-This work applies the structural remainder $R$ (Vaillancourt 2026a \cite{vaillancourt_r}) in detector form. CUSUM \cite{page1954} ties the memory layer on the original protocol (0.596 against 0.589) and needs a hand-set reference level; the memory layer is learned from data. On the incident, Hugging Face's forensic timeline \cite{hf_timeline}, OpenAI's postmortem \cite{openai_pm}, Elastic's mapping of the agent's tactics to detection rules \cite{elastic}, the CSA post-mortem \cite{csa}, and the METR and Redwood investigation \cite{metr} describe what happened. This report measures how much a detector gains by remembering, and when.
+This work applies the structural remainder $R$ (Vaillancourt 2026a \cite{vaillancourt_r}) in detector form. CUSUM \cite{page1954} ties the memory layer on the original protocol (0.596 against 0.589) and again on the corrected one (Table~\ref{tab:fair}); it needs a hand-set reference level and slack, where the memory layer is learned from data. On the incident, Hugging Face's forensic timeline \cite{hf_timeline}, OpenAI's postmortem \cite{openai_pm}, Elastic's mapping of the agent's tactics to detection rules \cite{elastic}, the CSA post-mortem \cite{csa}, and the METR and Redwood investigation \cite{metr} describe what happened. This report measures how much a detector gains by remembering, and when.
 
 \section*{3. Methods}
 The detector averages an entity's past events over time and scores the average beside the current event. It has two sweep windows, a 15-event window and a 24 to 120 hour window. False alarm rates are capped at 5\% of benign review windows. The per-event signal is kept deliberately weak because the real per-event signal is unknown. The 15-event window and the 24 to 120 hour windows are two regimes, run on the short and the long campaign; the gap between them is not measured.
@@ -78,7 +78,7 @@ Memory with the age term removed & 0.009 \\
 \caption{Original protocol. Detection within a 15-event window at 5\% false alarms.}\label{tab:locked}
 \end{table}
 
-The short history sweep catches 20\% of attacks within 15 events, against 10\% for the myopic scorer on the same synthetic data. On the long campaign the hit rate is 52\% within 24 hours and 92\% within 120 hours, against 13\% for the same scorer without memory (Table~\ref{tab:fair}, Figure~\ref{fig:long}).
+The short history sweep catches 20\% of attacks within 15 events, against 10\% for the myopic scorer on the same synthetic data. On the long campaign the hit rate is 52\% within 24 hours and 92\% within 120 hours, against 13\% for the same scorer without memory (Table~\ref{tab:fair}, Figure~\ref{fig:long}). CUSUM run on the no-memory score, with its reference level and slack set on the calibration set, lands within two points of the memory layer at both windows (Table~\ref{tab:fair}); the two carry the same information, and the memory layer is the one learned from data. Figure~\ref{fig:roc} gives detection against false-alarm rate for all three, so the 5\% used throughout is one point on a curve rather than a choice that favours one policy.
 
 \begin{table}[H]\centering\small
 \begin{tabular}{lrr}
@@ -88,6 +88,7 @@ Long campaign, 4 benign entities per attacker, 5\% false alarms & 24h & 120h \\
 No memory & 0.10 & 0.13 \\
 Event index only & 0.01 & 0.06 \\
 Memory, fast ($\tau=120$) & 0.52 & 0.92 \\
+CUSUM on the no-memory score (slack 0) & 0.53 & 0.92 \\
 Memory, fast, age term removed & 0.37 & 0.84 \\
 Memory, fast, risk counted from lateral movement & 0.26 & 0.74 \\
 Original headline (attackers only, fast OR slow) & 0.43 & 0.88 \\
@@ -101,7 +102,12 @@ Original headline (attackers only, fast OR slow) & 0.43 & 0.88 \\
 \caption{Long campaign with four benign entities per attacker. Grey dashed: the original headline. The event-index detector collapses; the memory layer sits above the old headline at every window.}\label{fig:long}
 \end{figure}
 
-Detection at these rates relies on the history belonging to the same entity. With the attack spread across fresh entities every 50 events, the 120-hour rate drops from 94\% to 56\%; with no linkage at all, memory does no better than no memory (Table~\ref{tab:controls}, Figure~\ref{fig:controls}). Shuffling the order of events keeps half the advantage; the accumulation of evidence before onset does the work.
+\begin{figure}[H]\centering
+\includegraphics[width=0.95\linewidth]{roc_and_cusum.png}
+\caption{Detection against false-alarm rate on the fair long campaign, threshold swept over calibration quantiles and evaluated on test. Dashed line: the 5\% used throughout.}\label{fig:roc}
+\end{figure}
+
+Detection at these rates relies on the history belonging to the same entity. With the attack spread across fresh entities every 50 events, the 120-hour rate drops from 94\% to 56\%; with no linkage at all, memory does no better than no memory (Table~\ref{tab:controls}). Shuffling the order of events keeps half the advantage; the accumulation of evidence before onset does the work.
 
 \begin{table}[H]\centering\small
 \begin{tabular}{lrr}
@@ -118,11 +124,6 @@ Events shuffled in time within each entity & 0.08 / 0.46 & 0.09 / 0.55 \\
 \end{tabular}
 \caption{Controls that break temporal structure while keeping every event and label in place. Cells: no memory / memory. Each control's scorer is refit on that control's own training data.}\label{tab:controls}
 \end{table}
-
-\begin{figure}[H]\centering
-\includegraphics[width=0.95\linewidth]{temporal_structure_controls.png}
-\caption{The same controls as bars. Grey: no memory. Orange: memory.}\label{fig:controls}
-\end{figure}
 
 Detection tracks the longest identity the attacker does not rotate (Table~\ref{tab:keys}). Keep memory on every key the detector can read, and the attacker's cost becomes rotating all of them.
 
@@ -193,7 +194,7 @@ $\hat R_{\rm det}$ measures the relative reduction in out-of-sample cross-entrop
 The two sweeps expose different temporal regimes; evaluating both is useful when campaign duration is unknown.
 
 \subsection*{Limitations}
-The data is synthetic; the detector has not been run on real-world data. The per-event signal is kept deliberately weak because the real per-event signal is unknown. Memory here is one averaging scheme with two time constants; other stateful detectors are not tested. In addition: one benign-to-attacker ratio; one signal knob swept; thresholds calibrated to the generator; the risk label is a design choice, measured at stage 3 and stage 2; the incident calibration matches timing and shape, not features, and rests on one incident; and memory is keyed per identity, so what it buys depends on which identities the detector can read and how fast the attacker rotates them (Table~\ref{tab:keys}).
+The data is synthetic; the detector has not been run on real-world data. The per-event signal is kept deliberately weak because the real per-event signal is unknown. Memory here is one averaging scheme with two time constants; other stateful detectors are not tested. In addition: one benign-to-attacker ratio, and production populations are far more benign-heavy than 4:1, which tightens the false-alarm budget and would lower every rate reported here at 5\%; one signal knob swept; thresholds calibrated to the generator; the risk label is a design choice, measured at stage 3 and stage 2; the incident calibration matches timing and shape, not features, and rests on one incident; and memory is keyed per identity, so what it buys depends on which identities the detector can read and how fast the attacker rotates them (Table~\ref{tab:keys}).
 
 \subsection*{Future Work}
 \begin{enumerate}\item Entity keys under adversarial rotation. Table~\ref{tab:keys} assumes the detector reads the credential and source on every event and that rotation follows a fixed schedule. An attacker who rotates every key at the pod's rate, and a detector that links keys across rotations by behaviour, are both untested. \item Hugging Face's own telemetry. \item Other real data. \item The gap between the 15-event window and 24 hours, not measured. \item Swarms of agents spread across ephemeral sandboxes are open.\end{enumerate}
