@@ -1,0 +1,95 @@
+{
+  "n_boot": 2000,
+  "rows": [
+    {
+      "window_hours": 24,
+      "quantity": "myopic_tpr",
+      "point": 0.10436261757054233,
+      "ci_lo": 0.0980588353011807,
+      "ci_hi": 0.11056633980388234,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 24,
+      "quantity": "fast_tpr",
+      "point": 0.5467280368220933,
+      "ci_lo": 0.5370222133279968,
+      "ci_hi": 0.5559335601360816,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 24,
+      "quantity": "difference",
+      "point": 0.44236541925155093,
+      "ci_lo": 0.4316564938963378,
+      "ci_hi": 0.45337202321392833,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 24,
+      "quantity": "myopic_fpr_benign_entities",
+      "point": 0.04863640350877193,
+      "ci_lo": 0.04823372807017543,
+      "ci_hi": 0.04902851973684211,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 24,
+      "quantity": "fast_fpr_benign_entities",
+      "point": 0.0377719298245614,
+      "ci_lo": 0.03730123903508771,
+      "ci_hi": 0.03827807017543859,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 120,
+      "quantity": "myopic_tpr",
+      "point": 0.13267960776465879,
+      "ci_lo": 0.1259730838503102,
+      "ci_hi": 0.13908595157094256,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 120,
+      "quantity": "fast_tpr",
+      "point": 0.9404642785671403,
+      "ci_lo": 0.9358615169101461,
+      "ci_hi": 0.9448669201520913,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 120,
+      "quantity": "difference",
+      "point": 0.8077846708024815,
+      "ci_lo": 0.8001776065639383,
+      "ci_hi": 0.8155918551130679,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 120,
+      "quantity": "myopic_fpr_benign_entities",
+      "point": 0.04886530612244898,
+      "ci_lo": 0.04794691326530613,
+      "ci_hi": 0.049807385204081636,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    },
+    {
+      "window_hours": 120,
+      "quantity": "fast_fpr_benign_entities",
+      "point": 0.036863265306122446,
+      "ci_lo": 0.036018686224489796,
+      "ci_hi": 0.0377414668367347,
+      "n_attackers": 9994,
+      "n_benign_entities": 40000
+    }
+  ]
+}

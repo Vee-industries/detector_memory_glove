@@ -273,6 +273,16 @@ Detection tracks the longest identity the attacker does not rotate. Keeping memo
 
 `outputs/roc_and_cusum.png` gives detection against false-alarm rate for all three, threshold swept over calibration quantiles from 0.5 to 30 percent and evaluated on test, so the 5 percent used throughout is one point on a curve.
 
+### Bootstrap intervals for the main rates
+
+`scripts/17_bootstrap_intervals.py`. Percentile intervals from 2,000 resamples of the test attackers (detection) and test benign entities (false alarms), thresholds held at their calibration values.
+
+| Fair long campaign, 5% false alarms | 24h | 120h |
+|---|---:|---:|
+| No memory, detection | 0.104 [0.098, 0.111] | 0.133 [0.126, 0.139] |
+| Memory, fast tier, detection | 0.547 [0.537, 0.556] | 0.940 [0.936, 0.945] |
+| Difference | 0.442 [0.432, 0.453] | 0.808 [0.800, 0.816] |
+
 ### R_det, numerically
 
 R_det is estimated by a classifier plug-in: the out-of-sample cross-entropy of a fitted model for risk given X upper-bounds H(risk | X), so H(risk) minus that cross-entropy lower-bounds I(risk; X), and

@@ -56,8 +56,8 @@ Recommended next steps:
 - `docs/final_pitch.md`
 - `docs/white_paper.md`
 - `docs/methodology.md`
-- `scripts/08_lagged_baseline_and_rdet.py`, `scripts/09_benign_population_eval.py`, `scripts/10_clock_oracle.py`, `scripts/11_long_benign_population_eval.py`, `scripts/12_signal_strength_sweep.py`, `scripts/13_incident_calibrated_replay.py`, `scripts/14_temporal_structure_controls.py`, `scripts/15_entity_keys.py`, `scripts/16_roc_and_cusum.py`
-- `outputs/clock_oracle_results.csv`, `outputs/lagged_baseline_rdet_results.csv`, `outputs/benign_population_results.csv`, `outputs/long_benign_population_results.csv`, `outputs/signal_strength_sweep_results.csv`, `outputs/incident_calibrated_results_risk_stage2.csv`, `outputs/temporal_structure_controls.csv`, `outputs/entity_keys.csv`, `outputs/roc_and_cusum.csv`
+- `scripts/08_lagged_baseline_and_rdet.py`, `scripts/09_benign_population_eval.py`, `scripts/10_clock_oracle.py`, `scripts/11_long_benign_population_eval.py`, `scripts/12_signal_strength_sweep.py`, `scripts/13_incident_calibrated_replay.py`, `scripts/14_temporal_structure_controls.py`, `scripts/15_entity_keys.py`, `scripts/16_roc_and_cusum.py`, `scripts/17_bootstrap_intervals.py`
+- `outputs/clock_oracle_results.csv`, `outputs/lagged_baseline_rdet_results.csv`, `outputs/benign_population_results.csv`, `outputs/long_benign_population_results.csv`, `outputs/signal_strength_sweep_results.csv`, `outputs/incident_calibrated_results_risk_stage2.csv`, `outputs/temporal_structure_controls.csv`, `outputs/entity_keys.csv`, `outputs/roc_and_cusum.csv`, `outputs/bootstrap_intervals.csv`
 - `report/report.pdf`: the sprint report
 
 ## Key Restriction

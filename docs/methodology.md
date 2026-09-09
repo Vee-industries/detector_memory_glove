@@ -224,6 +224,10 @@ Fair long campaign. Every entity's pod key rotates every 50 events and its crede
 
 Fair long campaign. CUSUM S_t = max(0, S_(t-1) + p_t - ref - k) on the no-memory score p_t; ref is the mean no-memory score over benign entities' events on the calibration set; k is chosen from {0, 0.01, 0.02, 0.05, 0.1, 0.2} on the calibration set to maximise 120h detection at 5 percent false alarms, rejecting any value whose threshold is degenerate (zero) or whose calibration false-alarm rate falls outside 3 to 7 percent. Curves: thresholds at calibration quantiles for false-alarm targets from 0.5 to 30 percent, evaluated on test, for the no-memory scorer, CUSUM, and the fast memory tier at 24h and 120h.
 
-### 9.12 Results
+### 9.12 Bootstrap intervals (script 17)
+
+Fair long campaign, thresholds fixed at calibration values. 2,000 percentile-bootstrap resamples of the 10,000 test attack campaigns for detection and of the 40,000 test benign entities for the false-alarm rate, for the no-memory scorer and the fast tier at 24h and 120h, and for their difference.
+
+### 9.13 Results
 
 See the decomposition section of the README, pitch, and white paper, and `outputs/lagged_baseline_rdet_results.csv`, `outputs/benign_population_results.csv`, `outputs/clock_oracle_results.csv`, `outputs/long_benign_population_results.csv`, the `_risk_stage2` variants of the last two, and `outputs/signal_strength_sweep_results.csv`.
