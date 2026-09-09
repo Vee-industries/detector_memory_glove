@@ -1,0 +1,53 @@
+{
+  "campaign_hours": 108.0,
+  "steps": 2000,
+  "minutes_per_step": 3.24,
+  "hf_daily_actions": [
+    3779,
+    1135,
+    7677,
+    3892,
+    1130
+  ],
+  "generator": {
+    "T": 2000,
+    "quiet_frac": [
+      0.22,
+      0.44
+    ],
+    "front_frac": 0.22,
+    "p_front": 0.002,
+    "p_quiet": 0.0005,
+    "p_back": 0.006,
+    "p_mid": 0.0005
+  },
+  "windows_hours": [
+    24,
+    36,
+    52,
+    72
+  ],
+  "windows_steps": [
+    444,
+    667,
+    963,
+    1333
+  ],
+  "stride_steps": 222,
+  "risk_stage": 3,
+  "benign_per_attack": 4,
+  "signals": [
+    0.02,
+    0.05,
+    0.12,
+    0.25
+  ],
+  "fast_bc_gate_steps": 56,
+  "onset": {
+    "n": 9820,
+    "median_hours": 61.34400000000001,
+    "q05_hours": 21.759300000000003,
+    "q95_hours": 90.504
+  },
+  "hf_actual_response_hours": 52
+}

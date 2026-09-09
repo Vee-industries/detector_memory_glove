@@ -1,0 +1,63 @@
+{
+  "tau_fast": 120,
+  "tau_slow": 2500,
+  "stride": 34,
+  "step_minutes": 21,
+  "windows": {
+    "68": {
+      "hours": 23.8,
+      "tau_slow": 2500,
+      "fast_threshold": 0.9976,
+      "slow_threshold": 0.7678,
+      "individual_fpr": 0.029,
+      "fast_tpr": 0.1763,
+      "slow_tpr": 0.3696,
+      "or_tpr": 0.4321,
+      "or_fpr": 0.0498
+    },
+    "103": {
+      "hours": 36.0,
+      "tau_slow": 2500,
+      "fast_threshold": 0.9979,
+      "slow_threshold": 0.7782,
+      "individual_fpr": 0.028,
+      "fast_tpr": 0.2273,
+      "slow_tpr": 0.4353,
+      "or_tpr": 0.5081,
+      "or_fpr": 0.0479
+    },
+    "206": {
+      "hours": 72.1,
+      "tau_slow": 2500,
+      "fast_threshold": 0.9982,
+      "slow_threshold": 0.794,
+      "individual_fpr": 0.028,
+      "fast_tpr": 0.4308,
+      "slow_tpr": 0.6414,
+      "or_tpr": 0.729,
+      "or_fpr": 0.0471
+    },
+    "274": {
+      "hours": 95.9,
+      "tau_slow": 2500,
+      "fast_threshold": 0.9983,
+      "slow_threshold": 0.7992,
+      "individual_fpr": 0.029,
+      "fast_tpr": 0.5468,
+      "slow_tpr": 0.7475,
+      "or_tpr": 0.8287,
+      "or_fpr": 0.0485
+    },
+    "343": {
+      "hours": 120.0,
+      "tau_slow": 2500,
+      "fast_threshold": 0.9984,
+      "slow_threshold": 0.8092,
+      "individual_fpr": 0.029,
+      "fast_tpr": 0.637,
+      "slow_tpr": 0.8139,
+      "or_tpr": 0.8833,
+      "or_fpr": 0.0489
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "tau_fast": 120,
+  "tau_slow": 2500,
+  "stride": 34,
+  "step_minutes": 21,
+  "windows": {
+    "68": {
+      "hours": 23.8,
+      "fast_threshold_5": 0.9969714358939662,
+      "slow_threshold_5": 0.6672397564931439
+    },
+    "103": {
+      "hours": 36.0,
+      "fast_threshold_5": 0.9972445451730197,
+      "slow_threshold_5": 0.6746075606091093
+    },
+    "206": {
+      "hours": 72.1,
+      "fast_threshold_5": 0.9977475803927753,
+      "slow_threshold_5": 0.6980278326732063
+    },
+    "274": {
+      "hours": 95.9,
+      "fast_threshold_5": 0.9979528605277772,
+      "slow_threshold_5": 0.7122463722485699
+    },
+    "343": {
+      "hours": 120.0,
+      "fast_threshold_5": 0.9980822869707157,
+      "slow_threshold_5": 0.7264159370614066
+    }
+  }
+}

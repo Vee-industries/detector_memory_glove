@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+report/*.aux
+report/*.log
+report/*.out
+report/*.fls
+report/*.fdb_latexmk
+report/*.xdv
+outputs/_run*.log
