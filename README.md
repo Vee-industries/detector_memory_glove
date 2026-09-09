@@ -78,3 +78,7 @@ python scripts/15_entity_keys.py
 ## AI use
 
 AI tools were used for code, debugging, mathematical checking, and documentation, with the research direction and decisions human-led. A post-sprint AI review pass, authorised by the author, found the age confound and implemented the fair-setup experiments. Details in `docs/ai_use_disclosure.md`.
+
+## License
+
+Apache License 2.0. Copyright 2026 Kevin Vaillancourt. See `LICENSE` and `NOTICE`.
