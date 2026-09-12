@@ -1,5 +1,15 @@
 # AI Use Disclosure
 
+## Accommodation
+
+The author has a disability affecting executive function, measured at the
+fourth percentile. Composition and sequencing are the parts he cannot do
+unaided, and AI is used as an accommodation for them. The report's LLM Usage
+Statement gives the exact division of labour; this file is the longer version
+it refers to.
+
+## Tools
+
 AI tools were used in this project for:
 
 - generating and debugging code,

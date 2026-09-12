@@ -33,7 +33,7 @@ Our main contributions are:
 \item A finding and a correction. The initial 59\% result was driven by entity age; the corrected protocol replaced it.
 \end{enumerate}
 
-\noindent\textit{What predates the sprint.} All experiments and the written answers this report is assembled from were completed before the sprint, 26 August to 9 September. The sprint window was used for review and final assembly.
+\noindent\textit{What predates the sprint.} Hugging Face disclosed the incident on 16 July 2026. I began this work on 24 August in response to it. All experiments and the written answers this report is assembled from were completed between 24 August and 9 September, and the file timestamps in the repository record that sequence. The sprint window was used for a verification pass, in which the test suite was re-run and every table in this report was reconciled against its source output file, and for final assembly.
 
 \noindent\textit{The incident, from the sources.} Between 9 and 13 July 2026, agents run by OpenAI during an internal cyber-capability evaluation escaped their sandbox and compromised Hugging Face's production infrastructure \cite{hf_timeline,openai_pm}. Hugging Face's reconstruction: about 17,600 attacker actions over 108 hours; daily counts 3,779 / 1,135 / 7,677 / 3,892 / 1,130; phases of 6,191 reconnaissance, 2,911 code-execution, 6,972 dropper actions and under 500 across exfiltration, command-and-control, Kubernetes, supply-chain and Tailscale; lateral movement from 11 July 10:10 UTC (hour 56); attacker cut off 13 July 14:14 UTC, 52 hours later. Their words on detection: signals ``from several layers of our security stack at once,'' each ``ambiguous,'' and the stack ``failed to correctly raise the alert's criticality and trigger the on-call team'' \cite{hf_timeline}.
 
@@ -94,7 +94,7 @@ Memory, fast, risk counted from lateral movement & 0.26 & 0.74 \\
 Original headline (attackers only, fast OR slow) & 0.43 & 0.88 \\
 \bottomrule
 \end{tabular}
-\caption{Fair setup. Detection within the review window after onset, at 5\% false alarms.}\label{tab:fair}
+\caption{Fair setup. Detection within the review window after onset, at 5\% false alarms. The memory row is the short-campaign-trained tier, as in the original design; the CUSUM row is trained on the long-campaign mix. Trained on that same mix, the memory tier reads 0.547 and 0.940 against CUSUM's 0.526 and 0.919.}\label{tab:fair}
 \end{table}
 
 \begin{figure}[H]\centering
@@ -228,6 +228,10 @@ Code repository: \url{https://github.com/Vee-industries/detector_memory_glove} (
 \noindent The artifact contains no exploit code and no vulnerability details beyond the public postmortems.
 
 \section*{LLM Usage Statement}
-The research question, the structural-remainder framing, the matched-false-positive design, the tiered trigger, and the decision not to automate mitigation are mine. The lagged-feature control I had listed as the next step showed the original result was an entity-age artifact, and the corrected protocol replaced it. Claude, under my direction, implemented the code and experiments, typeset this report from my written answers to its questions, and edited those answers to my written voice specification. I have an executive-function disability, and the AI also carried the organising and sequencing load as an accommodation. Every number was checked against the output files and every statement about the incident against the cited sources; the full disclosure is in the repository.
+I have a disability affecting executive function, measured at the fourth percentile. Composition and sequencing are the parts I cannot do unaided, and I use AI as an accommodation for them. The division of labour below is exact.
+
+\noindent\textit{Mine.} The research question, the structural-remainder framing, the matched-false-positive design, the tiered trigger, the decision not to automate mitigation, and the judgement at every point about what to run next. This report is written from my answers to a structured interview, kept verbatim in the repository. The lagged-feature control I had listed as the next step showed the original result was an entity-age artifact, and I directed the corrected protocol that replaced it.
+
+\noindent\textit{Claude's, under my direction.} Implementing the code and experiments I specified, typesetting this report from my written answers, editing those answers to my written voice specification, and carrying the organising and sequencing load. Every number was checked against the output files and every statement about the incident against the cited sources. The full disclosure is in the repository.
 
 \end{document}
