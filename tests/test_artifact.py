@@ -142,12 +142,14 @@ def run_test(n_campaigns=25, seed_base=99000, atol=1e-9, verbose_mismatches=5):
 
 
 def test_edge_cases():
+    """Returns False on any failed check, so the caller can exit non-zero."""
     print("\n--- Edge case checks ---")
+    ok = True
     try:
         model = joblib.load(MODEL_PATH)
     except FileNotFoundError:
         print("Skipping edge cases: model file not found.")
-        return
+        return ok
 
     scorer = MemorySeverityScorer(
         tau=TAU,
@@ -160,6 +162,7 @@ def test_edge_cases():
     try:
         scorer.score("entity_a", {"signal": 0.5, "breadth": 1.0}, timestamp=0)
         print("FAIL: missing 'reversible' did not raise KeyError.")
+        ok = False
     except KeyError:
         print("PASS: missing feature key correctly raises KeyError.")
 
@@ -168,6 +171,7 @@ def test_edge_cases():
         print("PASS: cold-start entity scored without error.")
     except Exception as e:
         print(f"FAIL: cold-start entity raised unexpected error: {e}")
+        ok = False
 
     scorer.score("entity_c", {"signal": 0.1, "breadth": 0.0, "reversible": 1.0}, timestamp=0)
     scorer.prune_stale_entities(current_timestamp=1000)
@@ -175,9 +179,12 @@ def test_edge_cases():
         print("PASS: stale entity correctly pruned.")
     else:
         print("FAIL: stale entity was not pruned.")
+        ok = False
+
+    return ok
 
 
 if __name__ == "__main__":
     ok = run_test()
-    test_edge_cases()
-    sys.exit(0 if ok else 1)
+    edges_ok = test_edge_cases()
+    sys.exit(0 if ok and edges_ok else 1)
